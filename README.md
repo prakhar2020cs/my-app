@@ -54,6 +54,75 @@ This web-based application allows users to dynamically input their availability 
 
 ### Step 1: Clone the repository
 
-```bash
+bash
 git clone https://github.com/your-username/dynamic-availability-app.git
 cd dynamic-availability-app
+
+
+### Step 2: Frontend Setup
+Install Dependencies: Go to the frontend directory and install all dependencies:
+
+### bash
+
+cd frontend
+npm install
+Run the Frontend Development Server:
+
+### bash
+
+npm run dev
+The application will run at http://localhost:5173/ by default if using Vite.
+
+### Step 3: Backend Setup
+Set Up MySQL Database: Create a new MySQL database called availability_app (or any preferred name) using the MySQL console or a GUI like MySQL Workbench.
+
+### Example command:
+
+sql
+
+CREATE DATABASE availability_app;
+Configure Backend: In the backend/src/main/resources/application.properties file, configure the database settings:
+
+### properties
+
+spring.datasource.url=jdbc:mysql://localhost:3306/availability_app
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+Run Backend Server: From the backend directory, run the Spring Boot application:
+
+### bash
+
+### cd backend
+./mvnw spring-boot:run
+The backend API will run on http://localhost:8080/.
+
+### Step 4: Environment Variables
+Frontend: Create a .env file in the root of the frontend directory with the following variables:
+
+### bash
+
+VITE_API_URL=http://localhost:8080/api
+Backend: You can configure environment-specific properties in the application.properties file.
+
+### Step 5: Running the Application
+### Start the Frontend:
+
+### bash
+
+npm run dev
+Start the Backend:
+
+### bash
+
+./mvnw spring-boot:run
+Open the application in your browser at http://localhost:5173.
+
+### API Endpoints
+User Availability Endpoints:
+GET /api/availability: Fetch the logged-in user's availability.
+POST /api/availability: Add new availability.
+PUT /api/availability/{id}: Update existing availability.
+DELETE /api/availability/{id}: Delete availability.
+Admin Scheduling Endpoints:
+GET /api/admin/users: Fetch all users and their availability.
+POST /api/admin/schedule: Schedule a session for a user or group.
